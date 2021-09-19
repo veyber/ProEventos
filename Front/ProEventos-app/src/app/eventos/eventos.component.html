@@ -1,7 +1,75 @@
-<h1>Eventos do Components</h1>
+<h2>Eventos</h2>
+<hr>
 
-<div *ngFor="let evento of eventos">
-  <p><b>Tema:</b> {{evento.tema}}</p>
-  <p><b>Local:</b> {{evento.local}}</p>
-  <hr>
+<div class="form-inline">
+  <div class="form-group mb-4">
+    <input
+      type="search"
+      class="form-control mr-2"
+      placeholder="buscar"
+      [(ngModel)]="filtroLista"
+      aria-label="Search"
+    >
+    <button class="btn btn-outline-success">Buscar</button>
+  </div>
 </div>
+<h3>Filtro: {{filtroLista}}</h3>
+
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <div class="container-fluid">
+
+    <table class="table table-striped">
+      <thead class="thead-dark">
+
+        <tr>
+          <th>
+            <button class="btn btn-outline-dark bt-sm"
+            (click)="exibirImg = !exibirImg">
+              Imagem
+            </button>
+          </th>
+          <th>#</th>
+          <th>Tema</th>
+          <th>Local</th>
+          <th>Data</th>
+          <th>Qtd Pessoas</th>
+          <th>Lote</th>
+          <th>Opções</th>
+        </tr>
+      </thead>
+      <tbody *ngIf="eventosFiltrados.length">
+        <tr *ngFor="let evento of eventosFiltrados">
+          <td>
+            <img [collapse]="!exibirImg"
+              [isAnimated]="true"
+              src="/assets/{{evento.imagemURL}}"
+              alt=""
+              [style.width.px]="larguraImg"
+              [style.margin.px]="margemImg"
+            >
+          </td>
+          <td>{{evento.eventoId}}</td>
+          <td>{{evento.tema}}</td>
+          <td>{{evento.local}}</td>
+          <td>{{evento.dataEvento}}</td>
+          <td>{{evento.qtdPessoas}}</td>
+          <td>{{evento.lote}}</td>
+          <td>
+            <button type="button" class="btn btn-primary btn-sm mr-2">Editar</button>
+            <button type="button" class="btn btn-danger btn-sm">Excluir</button>
+          </td>
+        </tr>
+      </tbody>
+      <tfoot *ngIf="!eventosFiltrados.length">
+        <tr>
+          <td colspan="8" class="text-center">
+            <h4>Nenhum evento encontrado!</h4>
+          </td>
+        </tr>
+      </tfoot>
+    </table>
+
+  </div>
+</nav>
+
+<!-- {{eventos | json}} -->
