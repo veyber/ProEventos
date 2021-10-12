@@ -13,10 +13,10 @@ namespace ProEventos.Persistence
         public PalestrantePersist(ProEventosContext contextPalestrante)
         {
             _contextPalestrante = contextPalestrante;
-            //_contextEvento.ChangeTracker.QueryTrackingBehavior = QueryTrackingBehavior.NoTracking;
+            _contextPalestrante.ChangeTracker.QueryTrackingBehavior = QueryTrackingBehavior.NoTracking; //No Tracking
 
         }
-        public async Task<Palestrante[]> GetAllPalestrantesByNomeAsync(string nome, bool includeEventos)
+        public async Task<Palestrante[]> GetPalestrantesByNomeAsync(string nome, bool includeEventos)
         {
             IQueryable<Palestrante> query = _contextPalestrante.Palestrantes
                 .Include(p => p.RedesSociais);
@@ -28,7 +28,7 @@ namespace ProEventos.Persistence
             }
             query = query.OrderBy(p => p.Nome).
                 Where(p => p.Nome.ToLower().Contains(nome.ToLower()));
-            return await query.ToArrayAsync();
+            return await query.ToArrayAsync(); //NoTracking
         }
         public async Task<Palestrante[]> GetAllPalestrantesAsync(bool includeEventos = false)
         {
@@ -45,7 +45,7 @@ namespace ProEventos.Persistence
         }
         public async Task<Palestrante> GetPalestranteByIdAsync(int palestranteId, bool includeEventos)
         {
-            IQueryable<Palestrante> query = _contextPalestrante.Palestrantes.AsNoTracking()
+            IQueryable<Palestrante> query = _contextPalestrante.Palestrantes.AsNoTracking() //No Tracking
                 .Include(p => p.RedesSociais);
             if (includeEventos)
             {

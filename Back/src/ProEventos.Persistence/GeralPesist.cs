@@ -1,4 +1,5 @@
 using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore;
 using ProEventos.Persistence.Contexts;
 using ProEventos.Persistence.Interfaces;
 
@@ -9,7 +10,8 @@ namespace ProEventos.Persistence
         private readonly ProEventosContext _contextGeral;
         public GeralPersist(ProEventosContext contextGeral)
         {
-            this._contextGeral = contextGeral;
+            _contextGeral = contextGeral;
+            _contextGeral.ChangeTracker.QueryTrackingBehavior = QueryTrackingBehavior.NoTracking; //No Tracking
 
         }
         public void Add<T>(T entity) where T : class
@@ -23,11 +25,11 @@ namespace ProEventos.Persistence
 
         public void Delete<T>(T entity) where T : class
         {
-            this._contextGeral.RemoveRange(entity);
+            this._contextGeral.Remove(entity);
         }
         public void DeleteRange<T>(T[] entityArray) where T : class
         {
-            this._contextGeral.Remove(entityArray);
+            this._contextGeral.RemoveRange(entityArray);
         }
         public async Task<bool> SaveChangesAsync()
         {
