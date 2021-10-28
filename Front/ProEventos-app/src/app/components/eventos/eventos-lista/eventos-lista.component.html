@@ -39,13 +39,13 @@
             {{!exibirImg ? 'exibir' : 'ocultar'}}
             </button>
           </th>
-          <th>#</th>
+          <th class="d-none d-md-table-cell">#</th>
           <th>Tema</th>
-          <th class="d-none d-md-table-cell">Local</th>
+          <th>Local</th>
           <th>Data</th>
-          <th class="d-none d-md-table-cell">Nº Pessoas</th>
-          <th class="d-none d-md-table-cell">Lote</th>
-          <th>Opções</th>
+          <th class="d-none d-lg-table-cell">Nº Pessoas</th>
+          <th class="d-none d-lg-table-cell">Lote</th>
+          <th class="d-nove d-sm-table-cell">Opções</th>
         </tr>
       </thead>
       <tbody *ngIf="eventosFiltrados.length">
@@ -63,13 +63,13 @@
               [style.margin.px]="margemImg"
             >
           </td>
-          <td>{{evento.id}}</td>
+          <td class="d-none d-md-table-cell">{{evento.id}}</td>
           <td>{{evento.tema}}</td>
-          <td class="d-none d-md-table-cell">{{evento.local}}</td>
+          <td >{{evento.local}}</td>
           <td>{{evento.dataEvento | DateTimeFormat}}</td>
-          <td class="d-none d-md-table-cell">{{evento.qtdPessoas}}</td>
-          <td class="d-none d-md-table-cell">{{evento.lote}}</td>
-          <td>
+          <td class="d-none d-lg-table-cell">{{evento.qtdPessoas}}</td>
+          <td class="d-none d-lg-table-cell">{{evento.lotes}}</td>
+          <td class="d-nove d-sm-table-cell">
             <div class="btn-group">
               <button type="button" style="height:50px;width:50px"
                 class="btn btn-danger p-2 btn-lg btn-block "
