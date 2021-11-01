@@ -1,7 +1,6 @@
 using System;
-using ProEventos.Domain;
 
-namespace ProEventos.Domains
+namespace ProEventos.Domain
 {
     public class Lote
     {
@@ -11,6 +10,8 @@ namespace ProEventos.Domains
         public DateTime? DataInicio { get; set; }
         public DateTime? DataFim { get; set; }
         public int Quantidade { get; set; }
+
+        // [ForeignKey("EventosDetalhes")]
         public int EventoId { get; set; }
         public Evento Evento { get; set; }
     }
