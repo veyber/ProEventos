@@ -18,7 +18,7 @@
             <label>Tema</label>
             <input type="text"
             class="form-control"
-            [ngClass]="{'is-invalid': f.tema.errors && f.tema.touched}"
+            [ngClass]="cssValidatior(f.tema)"
             formControlName="tema"
             placeholder="Insira o Tema">
             <div *ngIf="f.tema.errors?.required" class="invalid-feedback">
@@ -37,7 +37,7 @@
             <label>Local</label>
             <input type="text"
             class="form-control"
-            [ngClass]="{'is-invalid': f.local.errors && f.local.touched}"
+            [ngClass]="cssValidatior(f.local)"
             formControlName="local"
             placeholder="Insira o Local">
             <div *ngIf="f.local.errors?.required" class="invalid-feedback">Local é obrigatorio.</div>
@@ -48,8 +48,11 @@
             <input type="datetime"
             class="form-control"
             formControlName="dataEvento"
-            [ngClass]="{'is-invalid': f.dataEvento.errors && f.dataEvento.touched}"
-            placeholder="00/00/0000 00:00">
+            [ngClass]="cssValidatior(f.dataEvento)"
+            placeholder="00/00/0000 00:00"
+            bsDatepicker
+            [bsConfig]="bsConfig"
+            value="{{evento.dataEvento | DateTimeFormat}}">
             <div *ngIf="f.dataEvento.errors?.required" class="invalid-feedback">Data é obrigatoria.</div>
           </div>
         </div>
@@ -58,7 +61,7 @@
             <label>Email</label>
             <input type="text"
             class="form-control"
-            [ngClass]="{'is-invalid': f.email.errors && f.email.touched}"
+            [ngClass]="cssValidatior(f.email)"
             formControlName="email"
             placeholder="e-mail">
             <div *ngIf="f.email.errors?.required" class="invalid-feedback">Email obrigatorio.</div>
@@ -68,11 +71,11 @@
             <label>Nº Pessoas</label>
             <input type=""
             class="form-control"
-            [ngClass]="{'is-invalid': f.qtdPessoas.errors && f.qtdPessoas.touched}"
+            [ngClass]="cssValidatior(f.qtdPessoas)"
             formControlName="qtdPessoas"
             placeholder="">
-          <div *ngIf="f.qtdPessoas.erros?.required" class="invalid-feedback">Nº Pessoas obrigatorio.</div>
-          <div *ngIf="f.qtdPessoas.erros?.max" class="invalid-feedback">Nº Pessoas maximo são 20000.</div>
+          <div *ngIf="f.qtdPessoas.errors?.required" class="invalid-feedback">Nº de Pessoas obrigatorio.</div>
+          <div *ngIf="f.qtdPessoas.errors?.max" class="invalid-feedback">Nº de Pessoas maximo são 20000.</div>
           </div>
           <div></div>
           <div class="form-group col-md-4">
@@ -95,7 +98,7 @@
       <button class="btn btn-outline-secondary mr-auto border" (click)="resetForm()">
         Cancelar
       </button>
-      <button class="btn btn-outline-secondary text-white" [disabled]="!form.valid">
+      <button class="btn btn-outline-secondary text-white" [disabled]="!form.valid" (click)="salvarAlteracao()">
         <!-- <span class="spinner-border spinner-border-sm mr-1"></span> -->
         Salvar
       </button>

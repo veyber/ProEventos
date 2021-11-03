@@ -111,7 +111,7 @@ namespace ProEventos.API.Controllers
             try
             {
                 return await _eventoService.DeleteEvento(id) ?
-                    Ok($"Evento Deletado. ID: {id}") :
+                    Ok(new { message = "Deletado" }) :
                     BadRequest("Evento não deletado.");
 
             }

@@ -29,7 +29,6 @@ namespace ProEventos.Application.Dtos
         public int QtdPessoas { get; set; }
 
         [Display(Name = "Imagem"),
-         Required(ErrorMessage = "{0} é obrigatorio."),
          RegularExpression(@".*\.(gif|jpe?g|bmp|png)$",
                            ErrorMessage = "{0} é invalida.")]
         public string ImagemURL { get; set; }
