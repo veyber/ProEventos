@@ -69,9 +69,9 @@ export class EventosListaComponent implements OnInit {
     });
   }
 
-  public openModal(event: any, templateDelete: TemplateRef<any>, eventoId: number): void {
+  public openModal(event: any, templateDelete: TemplateRef<any>, indice: number): void {
     event.stopPropagation();
-    this.eventoId = eventoId;
+    this.eventoId = indice;
     this.modalRef = this.modalService.show(templateDelete, {class: 'modal-sm'});
   }
 
